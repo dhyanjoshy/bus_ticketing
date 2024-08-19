@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Profile(models.Model):
@@ -38,27 +39,16 @@ class Bus(models.Model):
     bus_number = models.CharField(max_length=255)
     conductor_name = models.CharField(max_length=255)
     conductor_number = models.CharField(max_length=15)
-    seat1 = models.BooleanField(default=False)
-    seat2 = models.BooleanField(default=False)
-    seat3 = models.BooleanField(default=False)
-    seat4 = models.BooleanField(default=False)
-    seat5 = models.BooleanField(default=False)
-    seat6 = models.BooleanField(default=False)
-
-    def available_seats(self):
-        seats = {
-            'seat1': self.seat1,
-            'seat2': self.seat2,
-            'seat3': self.seat3,
-            'seat4': self.seat4,
-            'seat5': self.seat5,
-            'seat6': self.seat6,
-        }
-        return {k: v for k, v in seats.items() if not v}
     
     def __str__(self):
         return f"Id: {self.bus_id} Number: {self.bus_number}"
 
+class Seat(models.Model):
+    bus = models.ForeignKey(Bus, on_delete=models.CASCADE)
+    seat_number = models.CharField(max_length=5)
+
+    def __str__(self):
+        return f"Seat {self.seat_number} on {self.bus.bus_number}"
 
 class Fare(models.Model):
     source = models.ForeignKey(BusStop, related_name='fare_source', on_delete=models.CASCADE)
@@ -76,11 +66,24 @@ class Booking(models.Model):
     source = models.ForeignKey(BusStop, on_delete=models.CASCADE, related_name='bookings_source')
     destination = models.ForeignKey(BusStop, on_delete=models.CASCADE, related_name='bookings_destination')
     price = models.ForeignKey(Fare, on_delete=models.CASCADE, related_name='bookings_price')
-    bus_id = models.ForeignKey(Bus, on_delete=models.CASCADE, related_name='bookings_bus')
-    seat_no = models.IntegerField()
+    bus = models.ForeignKey(Bus, on_delete=models.CASCADE, related_name='bookings_bus')
+    seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
+    date = models.DateField(default=timezone.now)
 
     def __str__(self):
         return f"Booking {self.booking_id} by {self.user}"
+    
+    def is_seat_available(self):
+        # Check if the seat is available for the given route segment
+        conflicting_bookings = Booking.objects.filter(
+            bus=self.bus,
+            seat=self.seat
+        ).exclude(
+            destination__arrival_time__lte=self.source.arrival_time
+        ).exclude(
+            source__arrival_time__gte=self.destination.arrival_time
+        )
+        return not conflicting_bookings.exists()
 
 
 class BusSchedule(models.Model):

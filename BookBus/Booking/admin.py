@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Booking, Bus, BusStop, Route, BusSchedule, Fare
+from .models import Profile, Booking, Bus, BusStop, Route, BusSchedule, Fare, Seat
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
@@ -8,13 +8,13 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('booking_id', 'user', 'source', 'destination', 'price', 'bus_id')
-    list_filter = ('user', 'source', 'destination', 'bus_id')
-    search_fields = ('user__username', 'source__name', 'destination__name')
+    list_display = ('booking_id', 'user', 'source', 'destination', 'price', 'bus', 'seat', 'date')
+    list_filter = ('user', 'source', 'destination', 'bus', 'seat', 'date')
+    search_fields = ('user__username', 'source__name', 'destination__name', 'bus__bus_number', 'seat__seat_number')
 
 @admin.register(Bus)
 class BusAdmin(admin.ModelAdmin):
-    list_display = ('bus_number', 'route_id', 'conductor_name', 'conductor_number')
+    list_display = ('bus_id', 'bus_number', 'route_id', 'conductor_name', 'conductor_number')
     list_filter = ('route_id',)
     search_fields = ('bus_number', 'conductor_name')
 
@@ -46,3 +46,9 @@ class FareAdmin(admin.ModelAdmin):
     search_fields = ('source__name', 'destination__name')
 
     change_list_template = 'admin/booking/busstop/change_list.html'
+
+@admin.register(Seat)
+class SeatAdmin(admin.ModelAdmin):
+    list_display = ('bus', 'seat_number')
+    list_filter = ('bus',)
+    search_fields = ('bus__bus_number', 'seat_number')
