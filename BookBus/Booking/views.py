@@ -3,11 +3,12 @@ from django.http import HttpResponse
 from .functions_want import update_bus_stops,update_shed
 from django.contrib.auth.decorators import user_passes_test
 from .checks import admin_check,login_required
-from .models import Bus, BusStop, BusSchedule,Fare, Booking
+from .models import Bus, BusStop, BusSchedule,Fare, Booking, Seat,Route
 from  datetime import datetime
 from .forms import UserRegisterForm
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.forms import AuthenticationForm
+from .routes import route
 
 
 
@@ -99,21 +100,59 @@ def bus_detail(request, bus_number, source, destination):
     bus = get_object_or_404(Bus, bus_number=bus_number)
     source = get_object_or_404(BusStop, name=source)
     destination = get_object_or_404(BusStop, name=destination)
-    available_seats = bus.available_seats()
+
+
+    stop_order = route[bus.route_id.route_id]
+    print(stop_order)
     
-    if request.method == "POST":
-        selected_seat = request.POST.get('seat')
-        if selected_seat and available_seats.get(selected_seat):
-            setattr(bus, selected_seat, True)
-            bus.save()
-            return redirect('booking_confirmation', bus_number=bus_number)
+    source_index = stop_order.index(source.name)
+    destination_index = stop_order.index(destination.name)
+
+    if source_index > destination_index:
+        raise ValueError("Source must come before destination in the route")
+
+    
+    segment_start = source_index
+    segment_end = destination_index
+    
+    
+    bookings_in_bus = Booking.objects.filter(
+        bus=bus,
+        date__isnull=False,
+    )
+
+    overlapping_bookings = []
+
+    for booking in bookings_in_bus:
+        booking_start_index = stop_order.index(booking.source.name)
+        booking_end_index = stop_order.index(booking.destination.name)
+        booking_stops = set(range(booking_start_index,booking_end_index))
+        print(f"booking stops = {booking_stops}")
+        checking_stops = set(range(segment_start,segment_end))
+        print(f"checking stops = {checking_stops}")
+        inter = booking_stops.intersection(checking_stops)
+        print(f"intersection = {inter}")
+        if inter != set():
+            overlapping_bookings.append(booking)
+        else:
+            pass
+    
+    print(overlapping_bookings)
+    
+    all_seats = Seat.objects.filter(bus=bus)
+    available_seats = all_seats
+
+    for booking in overlapping_bookings:
+        available_seats = available_seats.exclude(seat_number=booking.seat.seat_number)
+    print(f"available_seats = {available_seats}")
 
     context = {
         'bus': bus,
-        'available_seats': available_seats,
         'source': source,
         'destination': destination,
+        'available_seats': available_seats,
     }
+    print(context)
     return render(request, 'bus_detail.html', context)
 
 
@@ -136,31 +175,18 @@ def create_booking_view(request):
         source = get_object_or_404(BusStop, name=source)
         destination = get_object_or_404(BusStop, name=destination)
         price = Fare.objects.filter(source=source, destination=destination).first()
+        seat = get_object_or_404(Seat, bus = bus, seat_number = seat_no)
+        print(seat)
 
         # Create the Booking object
         booking = Booking.objects.create(
             user=user,
-            bus_id=bus,
-            seat_no=seat_no,
+            bus_id=bus.bus_id,
+            seat=seat,
             source=source,
             destination=destination,
             price=price
         )
-
-        if seat_no == '1':
-            bus.seat1 = True
-        elif seat_no == '2':
-            bus.seat2 = True
-        elif seat_no == '3':
-            bus.seat3 = True
-        elif seat_no == '4':
-            bus.seat4 = True
-        elif seat_no == '5':
-            bus.seat5 = True
-        elif seat_no == '6':
-            bus.seat6 = True
-        
-        bus.save()
 
         return redirect('booking_confirmation', booking_id=booking.booking_id)
 

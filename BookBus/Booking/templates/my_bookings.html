@@ -27,10 +27,10 @@
                         {% for booking in bookings %}
                         <tr>
                             <td>{{ booking.booking_id }}</td>
-                            <td>{{ booking.bus_id.bus_number }}</td>
+                            <td>{{ booking.bus.bus_number }}</td>
                             <td>{{ booking.source.name }}</td>
                             <td>{{ booking.destination.name }}</td>
-                            <td>{{ booking.seat_no }}</td>
+                            <td>{{ booking.seat.seat_number }}</td>
                             <td>{{ booking.price.price }}</td>
                             <td>{{ booking.date }}</td>
                         </tr>
