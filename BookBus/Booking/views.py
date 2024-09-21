@@ -17,6 +17,10 @@ def index(request):
     bus_stops = BusStop.objects.all()  # Fetch all BusStop objects
     return render(request, 'index.html', {'bus_stops': bus_stops})
 
+def indextry(request):
+    bus_stops = BusStop.objects.all()  # Fetch all BusStop objects
+    return render(request, 'index2.html', {'bus_stops': bus_stops})
+
 
 def signup_view(request):
     if request.method == 'POST':
