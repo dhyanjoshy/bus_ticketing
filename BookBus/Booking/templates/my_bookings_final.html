@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block content %}
+<!-- start banner Area -->
+<section class="relative about-banner" id="home">	
+    <div class="overlay overlay-bg"></div>
+    <div class="container">				
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    My Bookings		
+                </h1>	
+                <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="my_bookings.html"> My Bookings</a></p>
+            </div>	
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->	
+
+<!-- Start Align Area -->
+<div class="whole-wrap">
+    <div class="container">
+        <div class="section-top-border">
+            <h3 class="mb-30">Booking History</h3>
+            <div class="progress-table-wrap">
+                <div class="progress-table" style="padding: 2%; border-radius: 15px;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                    <div class="table-head">
+                        <div class="booking_id">Booking ID</div>
+                        <div class="bus_number">Bus Number</div>
+                        <div class="source">Source</div>
+                        <div class="destination">Destination</div>
+                        <div class="seat_no">Seat Number</div>
+                        <div class="price">Price</div>
+                        <div class="booking_date">Date of Booking</div>
+
+                    </div>
+                    {% for booking in bookings %}
+                    <div class="table-row">
+                        <div class="booking_id">{{ booking.booking_id }}</div>
+                        <div class="bus_number">{{ booking.bus.bus_number }}</div>
+                        <div class="source">{{ booking.source.name }}</div>
+                        <div class="destination">{{ booking.destination.name }}</div>
+                        <div class="seat_no">{{ booking.seat.seat_number }}</div>
+                        <div class="price">{{ booking.price.price }}</div>
+                        <div class="booking_date">{{ booking.date }}</div>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Align Area -->
+{% endblock %}

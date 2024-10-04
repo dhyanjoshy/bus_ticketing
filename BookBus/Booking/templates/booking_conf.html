@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block content %}
+<style>
+    .carrd{
+        border-radius: 10px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        padding: 2%;
+    }
+</style>
+<!-- start banner Area -->
+<section class="relative about-banner">	
+    <div class="overlay overlay-bg"></div>
+    <div class="container">				
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Booking Confirmation				
+                </h1>	
+                <p class="text-white link-nav"><a href="index.html">Bus Details </a>  <span class="lnr lnr-arrow-right"></span>  <a href="contact.html"> Booking Confirmation</a></p>
+            </div>	
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->				  
+
+<!-- Start contact-page Area -->
+<section class="contact-page-area section-gap">
+    <div class="container">
+        <div class="row">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 carrd">
+                                    <h1><center>Booking Confirmed!</center></h1><br>
+                                    <p>Your booking has been successfully processed. Here are your booking details:</p><br> 
+                
+                                    <div class="booking-details text-left">
+                                        <div class="detail-item">
+                                            <strong>Bus Number: </strong> {{ booking.bus.bus_number }}
+                                        </div>
+                                        <div class="detail-item">
+                                            <strong>Seat Number:</strong> {{ booking.seat.seat_number }}
+                                        </div>
+                                        <div class="detail-item">
+                                            <strong>Source:</strong> {{ booking.source.name }}
+                                        </div>
+                                        <div class="detail-item">
+                                            <strong>Destination:</strong> {{ booking.destination.name }}
+                                        </div>
+                                        <div class="detail-item">
+                                            <strong>Price:</strong> ₹{{ booking.price.price }}
+                                        </div>
+                
+                                    <div class="mt-4">
+                                        <a href="{% url 'index' %}" class="genric-btn primary circle">Back to Home</a>
+                                        <a href="{% url 'my_bookings' %}" class="genric-btn success circle">View My Bookings</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>	
+</section>
+<!-- End contact-page Area -->
+{% endblock %}

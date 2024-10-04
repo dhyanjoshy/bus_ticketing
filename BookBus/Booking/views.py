@@ -19,7 +19,7 @@ def index(request):
 
 def indextry(request):
     bus_stops = BusStop.objects.all()  # Fetch all BusStop objects
-    return render(request, 'bus_list.html', {'bus_stops': bus_stops})
+    return render(request, 'seat_details.html', {'bus_stops': bus_stops})
 
 
 def signup_view(request):
@@ -158,7 +158,7 @@ def bus_detail(request, bus_number, source, destination):
         'available_seats': available_seats,
     }
     print(context)
-    return render(request, 'bus_detail.html', context)
+    return render(request, 'seat_details.html', context)
 
 
 @login_required
@@ -202,12 +202,12 @@ def create_booking_view(request):
 @login_required
 def booking_confirmation(request, booking_id):
     booking = get_object_or_404(Booking, pk=booking_id)
-    return render(request, 'booking_confirmation.html', {'booking': booking})
+    return render(request, 'booking_conf.html', {'booking': booking})
 
 @login_required
 def my_bookings(request):
     bookings = Booking.objects.filter(user=request.user)
-    return render(request, 'my_bookings.html', {'bookings': bookings})
+    return render(request, 'my_bookings_final.html', {'bookings': bookings})
 
 
 

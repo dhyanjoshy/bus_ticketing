@@ -1228,29 +1228,39 @@ h1, h2, h3, h4, h5, h6 {
   min-width: 800px;
 }
 
-.progress-table .serial {
-  width: 11.83%;
-  padding-left: 30px;
+.progress-table .booking_id {
+  width: 18%;
 }
 
-.progress-table .country {
-  width: 28.07%;
+.progress-table .bus_number {
+  width: 18%;
 }
 
-.progress-table .visit {
-  width: 19.74%;
+.progress-table .source {
+  width: 15%;
 }
 
-.progress-table .percentage {
-  width: 40.36%;
-  padding-right: 50px;
+.progress-table .destination {
+  width: 15%;
+}
+
+.progress-table .seat_no {
+  width: 15%;
+}
+
+.progress-table .price {
+  width: 15%;
+}
+
+.progress-table .booking_date {
+  width: 15%;
 }
 
 .progress-table .table-head {
   display: flex;
 }
 
-.progress-table .table-head .serial, .progress-table .table-head .country, .progress-table .table-head .visit, .progress-table .table-head .percentage {
+.progress-table .table-head .booking_id, .progress-table .table-head .bus_number, .progress-table .table-head .source, .progress-table .table-head .destination, .progress-table .table-head .seat_no, .progress-table .table-head .price, .progress-table .table-head .booking_date {
   color: #222222;
   line-height: 40px;
   text-transform: uppercase;
@@ -1263,57 +1273,11 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
 }
 
-.progress-table .table-row .serial, .progress-table .table-row .country, .progress-table .table-row .visit, .progress-table .table-row .percentage {
+.progress-table .table-row .booking_id, .progress-table .table-row .bus_number, .progress-table .table-row .source, .progress-table .table-row .destination, .progress-table .table-row .seat_no, .progress-table .table-row .price, .progress-table .table-row .booking_date {
   display: flex;
   align-items: center;
 }
 
-.progress-table .table-row .country img {
-  margin-right: 15px;
-}
-
-.progress-table .table-row .percentage .progress {
-  width: 80%;
-  border-radius: 0px;
-  background: transparent;
-}
-
-.progress-table .table-row .percentage .progress .progress-bar {
-  height: 5px;
-  line-height: 5px;
-}
-
-.progress-table .table-row .percentage .progress .progress-bar.color-1 {
-  background-color: #6382e6;
-}
-
-.progress-table .table-row .percentage .progress .progress-bar.color-2 {
-  background-color: #e66686;
-}
-
-.progress-table .table-row .percentage .progress .progress-bar.color-3 {
-  background-color: #f09359;
-}
-
-.progress-table .table-row .percentage .progress .progress-bar.color-4 {
-  background-color: #73fbaf;
-}
-
-.progress-table .table-row .percentage .progress .progress-bar.color-5 {
-  background-color: #73fbaf;
-}
-
-.progress-table .table-row .percentage .progress .progress-bar.color-6 {
-  background-color: #6382e6;
-}
-
-.progress-table .table-row .percentage .progress .progress-bar.color-7 {
-  background-color: #a367e7;
-}
-
-.progress-table .table-row .percentage .progress .progress-bar.color-8 {
-  background-color: #e66686;
-}
 
 .single-gallery-image {
   margin-top: 30px;
