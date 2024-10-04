@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block content %}
+<!-- start banner Area -->
+<section class="about-banner relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">				
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Available Buses				
+                </h1>	
+                <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="packages.html"> Available Buses</a></p>
+            </div>	
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+<!-- Start destinations Area -->
+<section class="destinations-area section-gap">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-40 col-lg-8">
+                <div class="title text-center">
+                    <h1 class="mb-10">Buses currently available</h1>
+                    <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, day to.</p>
+                </div>
+            </div>
+        </div>
+        {% if buses %}						
+        <div class="row">
+            {% for key, bus in buses.items %}
+            <div class="col-lg-4">
+                <div class="single-destinations">
+                    <div class="details">
+                        <h4>{{ bus.bus_number }}</h4>
+                        <p>
+                            Bengaluru, Karnataka
+                        </p>
+                        <ul class="package-list">
+                            <li class="d-flex justify-content-between align-items-center">
+                                <span>Source</span>
+                                <span>{{ bus.source }} at {{ bus.source_time|default_if_none:"N/A" }}</span>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                <span>Destination</span>
+                                <span>{{ bus.destination }} at {{ bus.destination_time|default_if_none:"N/A" }}</span>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                <span>Conductor</span>
+                                <span>{{ bus.conduct_num }}</span>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                <span>Conductor Number</span>
+                                <span>{{ bus.conduct_name }}</span>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                <span>Price per person</span>
+                                <a href="#" class="price-btn">{{ bus.price }}</a>
+                            </li>													
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+            																														
+        </div>
+        {% else %}
+            <p class="text-center">No buses available for the selected route and time.</p>
+        {% endif %}
+
+    </div>	
+</section>
+<!-- End destinations Area -->
+{% endblock %}

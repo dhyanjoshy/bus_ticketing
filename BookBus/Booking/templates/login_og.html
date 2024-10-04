@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block content %}
+<!-- start banner Area -->
+<section class="relative about-banner">	
+    <div class="overlay overlay-bg"></div>
+    <div class="container">				
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Login				
+                </h1>	
+                <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="login_final.html"> Login</a></p>
+            </div>	
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+<section class="contact-page-area section-gap" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10" style="text-align: center;">
+                <h2>Login</h2>
+                <form class="form-area contact-form" style="display: inline-block; width: 100%; max-width: 400px; text-align: left;" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username" required style="width: 100%;"><br><br>
+
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" required style="width: 100%;"><br><br>
+
+                    <button class="genric-btn primary e-large" type="submit" style="width: 100%;">Login</button>
+                </form>
+
+                <div class="sign-up" style="text-align: center;">
+                    <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

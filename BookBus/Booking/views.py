@@ -15,11 +15,11 @@ from .routes import route
 
 def index(request):
     bus_stops = BusStop.objects.all()  # Fetch all BusStop objects
-    return render(request, 'index.html', {'bus_stops': bus_stops})
+    return render(request, 'index2.html', {'bus_stops': bus_stops})
 
 def indextry(request):
     bus_stops = BusStop.objects.all()  # Fetch all BusStop objects
-    return render(request, 'index2.html', {'bus_stops': bus_stops})
+    return render(request, 'bus_list.html', {'bus_stops': bus_stops})
 
 
 def signup_view(request):
@@ -48,7 +48,7 @@ def login_view(request):
                 return redirect('/')
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'login_og.html')
 
 def logout_view(request):
     logout(request)
@@ -60,6 +60,7 @@ def buslist(request):
         source = request.POST.get('source')
         destination = request.POST.get('destination')
         time = request.POST.get('time')
+        print(f"Time : {time}")
         
         # Convert the time to a datetime.time object
         try:
@@ -95,7 +96,7 @@ def buslist(request):
             context[bus.bus_number]['price'] = Fare.objects.filter(source=source_stop, destination=destination_stop).first()
         
         print(context)
-        return render(request, 'buslist.html', {'buses':context})
+        return render(request, 'bus_list.html', {'buses':context})
 
     return HttpResponse("Invalid Request")
 
