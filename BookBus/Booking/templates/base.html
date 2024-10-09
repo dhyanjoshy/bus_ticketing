@@ -33,6 +33,12 @@
 			<link rel="stylesheet" href="{% static 'index2/css/owl.carousel.css' %}">				
 			<link rel="stylesheet" href="{% static 'index2/css/main.css' %}">
     </head>
+    <style>
+        .dropdown-menu .show {
+            display: flex !important; 
+            flex-direction: column !important;
+        }
+    </style>
     <body>	
         <header id="header">
             <div class="header-top">
@@ -60,10 +66,30 @@
                   <div id="logo">
                     <a href="index.html"><img src="{% static 'index2/img/easyBus-logo.png' %}" alt="" title="" /></a>
                   </div>
-                  <nav id="nav-menu-container">
-                    <ul class="nav-menu">
-                        <li><a href="{% url 'index' %}">Home</a></li>				          					          		          
-                        <li><a href="{% url 'index' %}#footer">Contact</a></li>
+                  <nav id="nav-menu-container" style = "padding-right: 10px; display: flex; justify-content: center;">
+                    <ul class="nav-menu" style = "padding-right: 10px; display: flex; justify-content: center; align-items: center;">
+                      <li><a href="{% url 'index' %}">Home</a></li>				          					          		          
+                      <li><a href="{% url 'index' %}#footer">Contact</a></li>
+                      {% if user.is_authenticated %}
+                      <li><img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;"></li>
+                      <li><span class="ml-3" style="color: white;">{{ user.first_name }} {{ user.last_name }}</span></li>
+                      <li><button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+
+                                <a class="dropdown-item" style="color: black;" href="{% url 'my_bookings' %}">My Bookings</a>
+                                <a class="dropdown-item" style="color: black;" href="{% url 'logout' %}">Logout</a>
+                        </div>
+                    </li>
+                      {% else %}
+                            <a href="{% url 'login' %}" class="btn btn-primary mr-2">Login</a>
+                            <a href="{% url 'signup' %}" class="btn btn-secondary">Sign Up</a>
+                      {% endif %}						
+                    </div>
+                    
+                    <div class="dropdown">
+                        
+                    </div>
+                    
                     </ul>
                   </nav><!-- #nav-menu-container -->					      		  
                 </div>

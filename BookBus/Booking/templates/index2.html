@@ -61,23 +61,23 @@
 				        <a href="index.html"><img src="{% static 'index2/img/easyBus-logo.png' %}"/></a>
 				      </div>
 					  <br>
-				      <nav id="nav-menu-container">
-				        <ul class="nav-menu">
+				      <nav id="nav-menu-container" style = "padding-right: 10px; display: flex; justify-content: center;">
+				        <ul class="nav-menu" style = "padding-right: 10px; display: flex; justify-content: center; align-items: center;">
 				          <li><a href="{% url 'index' %}">Home</a></li>				          					          		          
 				          <li><a href="{% url 'index' %}#footer">Contact</a></li>
 						  {% if user.is_authenticated %}
-						  <div class="d-flex align-items-center">
-							<img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
-							<span class="ml-3" style="color: white;">{{ user.username }}</span>
-							<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						  <li><img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;"></li>
+						  <li><span class="ml-3" style="color: white;">{{ user.first_name }} {{ user.last_name }}</span></li>
+						  <li><button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 								<a class="dropdown-item" style="color: black;" href="{% url 'my_bookings' %}">My Bookings</a>
 								<a class="dropdown-item" style="color: black;" href="{% url 'logout' %}">Logout</a>
-							</div>
-							{% else %}
+						  </div>
+						</li>
+						  {% else %}
 								<a href="{% url 'login' %}" class="btn btn-primary mr-2">Login</a>
 								<a href="{% url 'signup' %}" class="btn btn-secondary">Sign Up</a>
-							{% endif %}						
+						  {% endif %}						
 						</div>
 						
 						<div class="dropdown">
@@ -143,7 +143,7 @@
 		                <div class="menu-content pb-70 col-lg-8">
 		                    <div class="title text-center">
 		                        <h1 class="mb-10">Testimonial from our Clients</h1>
-		                        <p>The French Revolution constituted for the conscience of the dominant aristocratic class a fall from </p>
+		                        <p>Easy Bus has completely transformed the way I book my tickets. No more standing in long lines! The app is super easy to use, and the instant ticket confirmation makes my travel stress-free. </p>
 		                    </div>
 		                </div>
 		            </div>
@@ -155,7 +155,7 @@
 		                        </div>
 		                        <div class="desc">
 		                            <p>
-		                                Do you want to be even more successful? Learn to love learning and growth. The more effort you put into improving your skills, the bigger the payoff you.		     
+		                                I never knew booking bus tickets could be this simple! Easy Bus gives me all the options at my fingertips. The app's design is user-friendly, and I love the real-time seat availability feature.		     
 		                            </p>
 		                            <h4>Harriet Maxwell</h4>
 	                            	<div class="star">
@@ -173,7 +173,7 @@
 		                        </div>
 		                        <div class="desc">
 		                            <p>
-		                                A purpose is the eternal condition for success. Every former smoker can tell you just how hard it is to stop smoking cigarettes. However.
+		                                Thanks to Easy Bus, I saved so much time planning my trip. The app's seamless interface and quick booking process are just what I needed. Now I can book tickets anytime, anywhere!
 		                            </p>
 		                            <h4>Carolyn Craig</h4>
 	                           		<div class="star">
@@ -191,7 +191,7 @@
 		                        </div>
 		                        <div class="desc">
 		                            <p>
-		                                Do you want to be even more successful? Learn to love learning and growth. The more effort you put into improving your skills, the bigger the payoff you.		     
+		                                Easy Bus has been a game-changer for my daily commute. I can easily compare routes, timings, and fares. The customer support is also top-notch—they helped me out when I needed to reschedule.		     
 		                            </p>
 		                            <h4>Harriet Maxwell</h4>
 	                            	<div class="star">
@@ -209,7 +209,7 @@
 		                        </div>
 		                        <div class="desc">
 		                            <p>
-		                                A purpose is the eternal condition for success. Every former smoker can tell you just how hard it is to stop smoking cigarettes. However.
+		                                Booking bus tickets used to be such a hassle, but Easy Bus makes it so convenient. From payment options to live bus tracking, everything is so smooth. Highly recommended for frequent travelers!
 		                            </p>
 		                            <h4>Carolyn Craig</h4>
 	                           		<div class="star">
@@ -227,7 +227,7 @@
 		                        </div>
 		                        <div class="desc">
 		                            <p>
-		                                Do you want to be even more successful? Learn to love learning and growth. The more effort you put into improving your skills, the bigger the payoff you.		     
+		                                The real-time tracking feature is a lifesaver! I no longer have to guess when my bus will arrive. Easy Bus is the perfect app for anyone looking for convenience and efficiency in booking bus tickets.
 		                            </p>
 		                            <h4>Harriet Maxwell</h4>
 	                            	<div class="star">
@@ -245,7 +245,7 @@
 		                        </div>
 		                        <div class="desc">
 		                            <p>
-		                                A purpose is the eternal condition for success. Every former smoker can tell you just how hard it is to stop smoking cigarettes. However.
+		                                I love how Easy Bus gives me multiple options for buses and routes in just a few clicks. The app is fast, reliable, and I always find the best deals. I can’t imagine booking tickets any other way now!
 		                            </p>
 		                            <h4>Carolyn Craig</h4>
 	                           		<div class="star">

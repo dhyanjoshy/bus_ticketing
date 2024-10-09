@@ -34,7 +34,7 @@ def signup_view(request):
             return redirect('/')
     else:
         form = UserRegisterForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'signup_og.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
@@ -54,7 +54,7 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
-@login_required
+# @login_required
 def buslist(request):
     if request.method == "POST":
         source = request.POST.get('source')
