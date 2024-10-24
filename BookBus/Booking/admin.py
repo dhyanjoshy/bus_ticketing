@@ -24,7 +24,6 @@ class BusStopAdmin(admin.ModelAdmin):
     list_filter = ('route_id',)
     search_fields = ('name', 'location')
 
-    change_list_template = 'admin/booking/busstop/change_list.html'
 
 @admin.register(Route)
 class RouteAdmin(admin.ModelAdmin):
@@ -37,15 +36,12 @@ class BusScheduleAdmin(admin.ModelAdmin):
     list_filter = ('bus', 'stop')
     search_fields = ('bus__bus_number', 'stop__name')
 
-    change_list_template = 'admin/booking/busstop/change_list.html'
 
 @admin.register(Fare)
 class FareAdmin(admin.ModelAdmin):
     list_display = ('source', 'destination', 'price', 'route')
     list_filter = ('route',)
     search_fields = ('source__name', 'destination__name')
-
-    change_list_template = 'admin/booking/busstop/change_list.html'
 
 @admin.register(Seat)
 class SeatAdmin(admin.ModelAdmin):
